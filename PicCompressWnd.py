@@ -26,26 +26,26 @@ class MainWindow(wx.Frame):
     def __init__(self, tt):
 
         self.MENUBAR = [('&File', (
-                                ('&Open',                 '', MainWindow.ID_MENUITEM_OPEN,           self.menuOpen),
-                                ("", '', '', ""),
-                                ('Shutdown after finish', '', MainWindow.ID_MENUITEM_SHUTDOWN,       self.menuShutdown, wx.ITEM_CHECK),
+                                ('&Open',                   '', MainWindow.ID_MENUITEM_OPEN,        '', '',             self.menuOpen),
+                                ('', '', '', '', '', ''),
+                                ('Shutdown after finish',   '', MainWindow.ID_MENUITEM_SHUTDOWN,    '', wx.ITEM_CHECK,  self.menuShutdown),
                         )),
-                        ('&Edit', (('Start',        '', MainWindow.ID_MENUITEM_START,     self.menuStartStop),
-                                   ('Stop',         '', MainWindow.ID_MENUITEM_STOP,      self.menuStartStop),
-                                   ("", "", '', ""),
-                                   ('Clear All',    '', MainWindow.ID_MENUITEM_CLEAN_ALL, self.menuClearAll),
+                        ('&Edit', (('Start',                '', MainWindow.ID_MENUITEM_START,       '', '',             self.menuStartStop),
+                                   ('Stop',                 '', MainWindow.ID_MENUITEM_STOP,        '', '',             self.menuStartStop),
+                                   ('', '', '', '', '', ''),
+                                   ('Clear All',            '', MainWindow.ID_MENUITEM_CLEAN_ALL,   '', '',             self.menuClearAll),
                         ))
                ]
 
         self.POPMENU = [
-            (MainWindow.ID_MENUITEM_VIEW,   'View',     self.menuItemView,      MainWindow.ID_LIST),
-            (MainWindow.ID_MENUITEM_REMOVE, 'Remove',   self.menuItemRemove,    MainWindow.ID_LIST),
+            ('View',    'View',     MainWindow.ID_MENUITEM_VIEW,      '', '', self.menuItemView,      MainWindow.ID_LIST),
+            ('Remove',  'Remove',   MainWindow.ID_MENUITEM_REMOVE,    '', '', self.menuItemRemove,    MainWindow.ID_LIST),
         ]
 
         self.TOOLBAR = [
-            (MainWindow.ID_TOOL_OPEN,   'Open',          wx.ArtProvider.GetBitmap(wx.ART_FILE_OPEN, wx.ART_BUTTON, MainWindow.tsize),   self.menuOpen),
-            (MainWindow.ID_TOOL_TOGGLE, 'Start / Stop',  wx.ArtProvider.GetBitmap(wx.ART_FIND, wx.ART_BUTTON, MainWindow.tsize),        self.menuStartStop),
-            (MainWindow.ID_TOOL_CLEAN,  'Clear All',     wx.ArtProvider.GetBitmap(wx.ART_GO_DOWN, wx.ART_BUTTON, MainWindow.tsize),     self.menuClearAll)
+            ('Open',            'Open',         MainWindow.ID_TOOL_OPEN,    wx.ArtProvider.GetBitmap(wx.ART_FILE_OPEN, wx.ART_BUTTON, MainWindow.tsize), wx.ITEM_NORMAL,  self.menuOpen),
+            ('Start / Stop',    'Start / Stop', MainWindow.ID_TOOL_TOGGLE,  wx.ArtProvider.GetBitmap(wx.ART_FIND, wx.ART_BUTTON, MainWindow.tsize),      wx.ITEM_NORMAL,  self.menuStartStop),
+            ('Clear All',       'Clear All',    MainWindow.ID_TOOL_CLEAN,   wx.ArtProvider.GetBitmap(wx.ART_GO_DOWN, wx.ART_BUTTON, MainWindow.tsize),   wx.ITEM_NORMAL,  self.menuClearAll)
         ]
 
         wx.Frame.__init__(self, None, title=tt, size=(1020, 800))
@@ -91,9 +91,9 @@ class MainWindow(wx.Frame):
 
     def menuOpen(self, event):
         # print 'open'
-        ret, file = vinux.showFileDlg(self, 'select picture to compress', wildcard = "Picture Files(*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp", single = False)
+        ret, files = vinux.showFileDlg(self, 'select picture to compress', wildcard = "Picture Files(*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp", single = False)
         if ret:
-            vinux.showMsg(self, file)
+            vinux.showMsg(self, files)
 
     def menuStartStop(self, event):
         vinux.showMsg(self, 'start/stop')
@@ -264,8 +264,6 @@ class FileDropTarget(wx.FileDropTarget):
         numRows = len(fileNames)
         for fileName in fileNames:
             self.adapter.AppendItem(fileName)
-        wx.CallAfter(self.window.ForceRefresh)
-        # self.window.ForceRefresh()
 
 class VinTable(wx.grid.PyGridTableBase):
     def __init__(self, colLabel):

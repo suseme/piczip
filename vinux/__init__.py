@@ -1,6 +1,9 @@
-__author__ = 'vin@misday'
+__author__ = 'vin@misday.com'
 
 import wx, webbrowser
+from vincore import Callbacks
+
+(IDX_LABEL, IDX_HELP, IDX_ID, IDX_BITMAP, IDX_KIND, IDX_HANDLER, IDX_ID2) = range(0, 7)
 
 def createMenubar(wnd, menuDef):
     '''menuDef = [('FILE', (
@@ -9,7 +12,7 @@ def createMenubar(wnd, menuDef):
                   )]'''
     menuBar = wx.MenuBar()
     for eachMenu in menuDef:
-        label = eachMenu[0]
+        label = eachMenu[IDX_LABEL]
         items = eachMenu[1]
         menuBar.Append(createMenuItems(wnd, items), label)
     wnd.SetMenuBar(menuBar)
@@ -19,17 +22,16 @@ def createMenuItems(wnd, menuData):
     menu = wx.Menu()
     for item in menuData:
         if len(item) == 2:
-            label = item[0]
+            label = item[IDX_LABEL]
             subMenu = wnd.createMenuItems(item[1])
             menu.AppendMenu(wx.ID_ANY, label, subMenu)
         else:
-            label = item[0]
-            help = item[1]
-            id = item[2]
-            handler = item[3]
-            if len(item) > 4:
-                kind = item[4]
-            else:
+            label = item[IDX_LABEL]
+            help = item[IDX_HELP]
+            id = item[IDX_ID]
+            handler = item[IDX_HANDLER]
+            kind = item[IDX_KIND]
+            if not kind:
                 kind = wx.ITEM_NORMAL
 
             if label:
@@ -42,8 +44,19 @@ def createMenuItems(wnd, menuData):
 def createPopmenu(wnd, popmenuDef):
     wnd.popupmenu = wx.Menu()
     for item in popmenuDef:
-        wnd.popupmenu.Append(item[0],   item[1])
-        wnd.Bind(wx.EVT_MENU, item[2], id=item[0],     id2=item[3])
+        label = item[IDX_LABEL]
+        help = item[IDX_HELP]
+        id = item[IDX_ID]
+        handler = item[IDX_HANDLER]
+        kind = item[IDX_KIND]
+        if not kind:
+            kind = wx.ITEM_NORMAL
+
+        if label:
+            wnd.popupmenu.Append(id, label, help, kind=kind)
+            wnd.Bind(wx.EVT_MENU, handler, id=id, id2=item[IDX_ID2])
+        else:
+            wnd.popupmenu.AppendSeparator()
     return wnd.popupmenu
 
 def createToolBar(wnd, toolbarDef):
@@ -52,8 +65,16 @@ def createToolBar(wnd, toolbarDef):
         '''
     toolbar = wnd.CreateToolBar()
     for item in toolbarDef:
-        toolbar.AddLabelTool(item[0], item[1], item[2])
-        wnd.Bind(wx.EVT_TOOL, item[3], id=item[0])
+        label = item[IDX_LABEL]
+        help = item[IDX_HELP]
+        bitmap = item[IDX_BITMAP]
+        id = item[IDX_ID]
+        handler = item[IDX_HANDLER]
+        kind = item[IDX_KIND]
+        if not kind:
+            kind = wx.ITEM_NORMAL
+        toolbar.AddLabelTool(id, label, bitmap, kind=kind, shortHelp=help)
+        wnd.Bind(wx.EVT_TOOL, handler, id=id)
     toolbar.Realize()
     return toolbar
 
@@ -87,7 +108,10 @@ def showFileDlg(wnd, msg = '', path = '', wildcard = "All Files(*.*)|*.*", singl
                         wildcard = wildcard
                         )
     if dlg.ShowModal() == wx.ID_OK:
-        filePath = dlg.GetPath()
+        if single:
+            filePath = dlg.GetPath()
+        else:
+            filePath = dlg.GetPaths()
     else:
         ret = False
     dlg.Destroy()
@@ -105,3 +129,15 @@ def openInNewTab(url):
             webbrowser.open(url, new=2, autoraise=True)
         else:
             print('url is empty')
+
+class FileDropTarget(wx.FileDropTarget, Callbacks):
+    (EVT_ON_DROP_FILES,) = range(0, 1)
+
+    def __init__(self):
+        wx.FileDropTarget.__init__(self)
+        Callbacks.__init__(self)
+        self.init([FileDropTarget.EVT_ON_DROP_FILES, ])
+
+    def OnDropFiles(self,  x,  y, fileNames):
+        print fileNames
+        self.dispatch(FileDropTarget.EVT_ON_DROP_FILES, fileNames)
