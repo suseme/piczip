@@ -4,7 +4,7 @@
 __author__ = 'vin@misday.com'
 
 import os, wx, wx.grid
-import  vinux
+import pyvin.ux
 
 class MainWindow(wx.Frame):
     tsize = (20, 20)
@@ -50,10 +50,10 @@ class MainWindow(wx.Frame):
 
         wx.Frame.__init__(self, None, title=tt, size=(1020, 800))
 
-        self.menubar = vinux.createMenubar(self, self.MENUBAR) #self.createMenubar(self.MENUBAR)
-        self.toolbar = vinux.createToolBar(self, self.TOOLBAR)
+        self.menubar = pyvin.ux.createMenubar(self, self.MENUBAR) #self.createMenubar(self.MENUBAR)
+        self.toolbar = pyvin.ux.createToolBar(self, self.TOOLBAR)
         self.statusBar = self.CreateStatusBar()
-        vinux.createPopmenu(self, self.POPMENU)
+        pyvin.ux.createPopmenu(self, self.POPMENU)
 
         #panel######################################
         panel = wx.Panel(self)
@@ -91,15 +91,15 @@ class MainWindow(wx.Frame):
 
     def menuOpen(self, event):
         # print 'open'
-        ret, files = vinux.showFileDlg(self, 'select picture to compress', wildcard = "Picture Files(*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp", single = False)
+        ret, files = pyvin.ux.showFileDlg(self, 'select picture to compress', wildcard = "Picture Files(*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp", single = False)
         if ret:
-            vinux.showMsg(self, files)
+            pyvin.ux.showMsg(self, files)
 
     def menuStartStop(self, event):
-        vinux.showMsg(self, 'start/stop')
+        pyvin.ux.showMsg(self, 'start/stop')
 
     def menuClearAll(self, event):
-        vinux.showMsg(self, 'clear all')
+        pyvin.ux.showMsg(self, 'clear all')
 
     def menuShutdown(self, event):
         print self.menubar.IsChecked(MainWindow.ID_MENUITEM_SHUTDOWN)

@@ -4,9 +4,9 @@
 import os
 import wx
 from PIL import Image
-from vincore import Processor
-import vinux
-from vinux import FileDropTarget
+from pyvin.core import Processor
+import pyvin.ux
+from pyvin.ux import FileDropTarget
 
 class Imaging:
     def __init__(self):
@@ -49,8 +49,8 @@ class MainWindow(wx.Frame):
             ('Clear All',       'Clear All',    MainWindow.ID_TOOL_CLEAN,   wx.ArtProvider.GetBitmap(wx.ART_DELETE, wx.ART_BUTTON, MainWindow.tsize),   wx.ITEM_NORMAL,  self.menuClearAll)
         ]
 
-        self.popupmenu = vinux.createPopmenu(self, self.POPMENU)
-        self.toolbar = vinux.createToolBar(self, self.TOOLBAR)
+        self.popupmenu = pyvin.ux.createPopmenu(self, self.POPMENU)
+        self.toolbar = pyvin.ux.createToolBar(self, self.TOOLBAR)
         self.statusBar = self.CreateStatusBar()
 
         panel = wx.Panel(self)
@@ -114,7 +114,7 @@ class MainWindow(wx.Frame):
     def menuOpen(self, event):
         file_wildcard = "Picture Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files(*.*)|*.*"
         msg = "Select picture file(s) to compress..."
-        ret, files = vinux.showFileDlg(self, msg, os.getcwd(), file_wildcard, False)
+        ret, files = pyvin.ux.showFileDlg(self, msg, os.getcwd(), file_wildcard, False)
         if ret:
             self.paths = files
             print files
@@ -139,7 +139,7 @@ class MainWindow(wx.Frame):
     def onItemDbClick(self,event):
         idx = self.list.GetFocusedItem()
         name = self.list.GetItemText(idx, MainWindow.COLUMN_NAME)
-        vinux.openInNewTab(name)
+        pyvin.ux.openInNewTab(name)
 
     def onItemShowPopup(self, event):
         if self.list.GetFirstSelected() != -1:
@@ -159,7 +159,7 @@ class MainWindow(wx.Frame):
         idx = self.list.GetFirstSelected()
         if idx != -1:
             url = self.list.GetItemText(idx, MainWindow.COLUMN_NAME)
-            vinux.openInNewTab(url)
+            pyvin.ux.openInNewTab(url)
 
     def onDropFiles(self, event, files):
         for f in files:
@@ -189,7 +189,7 @@ class MainWindow(wx.Frame):
     def onStop(self, event):
         print 'onStop'
         self.gauge.SetValue(100);
-        vinux.showMsg(self, 'Finish', 'Compress Picture')
+        pyvin.ux.showMsg(self, 'Finish', 'Compress Picture')
         return True
 
 if __name__ == '__main__':
