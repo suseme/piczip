@@ -1,0 +1,158 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'piczip.ui'
+#
+# Created: Thu Jan 14 16:47:54 2016
+#      by: PyQt4 UI code generator 4.11.1
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.resize(800, 600)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("res/icon-32.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
+        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.horizontalLayout.addWidget(self.label)
+        self.comboBox_scale = QtGui.QComboBox(self.centralwidget)
+        self.comboBox_scale.setObjectName(_fromUtf8("comboBox_scale"))
+        self.comboBox_scale.addItem(_fromUtf8(""))
+        self.comboBox_scale.addItem(_fromUtf8(""))
+        self.comboBox_scale.addItem(_fromUtf8(""))
+        self.comboBox_scale.addItem(_fromUtf8(""))
+        self.comboBox_scale.addItem(_fromUtf8(""))
+        self.horizontalLayout.addWidget(self.comboBox_scale)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.tableWidget = QtGui.QTableWidget(self.centralwidget)
+        self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setRowCount(0)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.verticalLayout.addWidget(self.tableWidget)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtGui.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setObjectName(_fromUtf8("menubar"))
+        self.menuFile = QtGui.QMenu(self.menubar)
+        self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuEdit = QtGui.QMenu(self.menubar)
+        self.menuEdit.setObjectName(_fromUtf8("menuEdit"))
+        self.menuHelp = QtGui.QMenu(self.menubar)
+        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar.setObjectName(_fromUtf8("statusbar"))
+        MainWindow.setStatusBar(self.statusbar)
+        self.toolBar = QtGui.QToolBar(MainWindow)
+        self.toolBar.setMovable(False)
+        self.toolBar.setObjectName(_fromUtf8("toolBar"))
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
+        self.actionOpen = QtGui.QAction(MainWindow)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("res/Open_folder_add_48px.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionOpen.setIcon(icon1)
+        self.actionOpen.setObjectName(_fromUtf8("actionOpen"))
+        self.actionClear = QtGui.QAction(MainWindow)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("res/Clear_48px.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionClear.setIcon(icon2)
+        self.actionClear.setObjectName(_fromUtf8("actionClear"))
+        self.actionStart = QtGui.QAction(MainWindow)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("res/Start_48px.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionStart.setIcon(icon3)
+        self.actionStart.setObjectName(_fromUtf8("actionStart"))
+        self.actionStop = QtGui.QAction(MainWindow)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("res/Stop_red_48px.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionStop.setIcon(icon4)
+        self.actionStop.setObjectName(_fromUtf8("actionStop"))
+        self.actionAbout = QtGui.QAction(MainWindow)
+        self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
+        self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionClear)
+        self.menuEdit.addAction(self.actionStart)
+        self.menuEdit.addAction(self.actionStop)
+        self.menuHelp.addAction(self.actionAbout)
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuEdit.menuAction())
+        self.menubar.addAction(self.menuHelp.menuAction())
+        self.toolBar.addAction(self.actionOpen)
+        self.toolBar.addAction(self.actionClear)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.actionStart)
+        self.toolBar.addAction(self.actionStop)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QObject.connect(self.comboBox_scale, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), MainWindow.on_scaleChanged)
+        QtCore.QObject.connect(MainWindow, QtCore.SIGNAL(_fromUtf8("when_statusMsg(QString)")), self.statusbar.showMessage)
+        QtCore.QObject.connect(self.menubar, QtCore.SIGNAL(_fromUtf8("triggered(QAction*)")), MainWindow.on_actionTriggered)
+        QtCore.QObject.connect(MainWindow, QtCore.SIGNAL(_fromUtf8("when_clear()")), self.tableWidget.clear)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(_translate("MainWindow", "Piczip", None))
+        self.label.setText(_translate("MainWindow", "Scale:", None))
+        self.comboBox_scale.setItemText(0, _translate("MainWindow", "Taobao", None))
+        self.comboBox_scale.setItemText(1, _translate("MainWindow", "1/2", None))
+        self.comboBox_scale.setItemText(2, _translate("MainWindow", "1/4", None))
+        self.comboBox_scale.setItemText(3, _translate("MainWindow", "1/8", None))
+        self.comboBox_scale.setItemText(4, _translate("MainWindow", "1/16", None))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Path", None))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Progress", None))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Done", None))
+        self.menuFile.setTitle(_translate("MainWindow", "File", None))
+        self.menuEdit.setTitle(_translate("MainWindow", "Edit", None))
+        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
+        self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar", None))
+        self.actionOpen.setText(_translate("MainWindow", "Open", None))
+        self.actionOpen.setToolTip(_translate("MainWindow", "Add pictures for zip", None))
+        self.actionOpen.setShortcut(_translate("MainWindow", "Ctrl+O", None))
+        self.actionClear.setText(_translate("MainWindow", "Clear", None))
+        self.actionClear.setToolTip(_translate("MainWindow", "Clear all items", None))
+        self.actionClear.setShortcut(_translate("MainWindow", "Ctrl+D", None))
+        self.actionStart.setText(_translate("MainWindow", "Start", None))
+        self.actionStart.setToolTip(_translate("MainWindow", "Start zip", None))
+        self.actionStart.setShortcut(_translate("MainWindow", "Ctrl+G", None))
+        self.actionStop.setText(_translate("MainWindow", "Stop", None))
+        self.actionStop.setToolTip(_translate("MainWindow", "Stop zip", None))
+        self.actionStop.setShortcut(_translate("MainWindow", "Ctrl+H", None))
+        self.actionAbout.setText(_translate("MainWindow", "About", None))
+
+# import img_rc

@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="res">
+    <file>icon-32.png</file>
+    <file>Open_folder_add_48px.png</file>
+    <file>Start_48px.png</file>
+    <file>Stop_red_48px.png</file>
+    <file>Clear_48px.png</file>
+  </qresource>
+</RCC>

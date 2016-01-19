@@ -12,10 +12,10 @@ cx = dict(
 )
 
 setup(
-    name = "PicCompress.",
+    name = "Piczip.",
     description = "Compress Picture Size.",
     version = "1.1.0.0",
     # console=[cx],
     # windows=[wx],
-    windows = [{"script":"PicCompressWnd.py", "icon_resources": [(0, "icon.ico")]} ]
+    windows = [{"script":"PiczipWnd_qt.py", "icon_resources": [(0, "icon.ico")]} ]
 )
