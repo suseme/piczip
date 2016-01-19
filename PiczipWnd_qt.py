@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import sys, os
-from PIL import Image
+import sys
 from piczip import *
+from imaging import Imaging
 from pyvin.core import Processor
 
 from PyQt4.QtCore import *
@@ -35,6 +35,31 @@ class MainWindow(QMainWindow):
         self.processIdx = 0
         self.img = Imaging()
 
+        # support drag drop
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+        else:
+            super(QMainWindow, self).dragEnterEvent(event)
+
+    # def dragMoveEvent(self, event):
+    #     super(QMainWindow, self).dragMoveEvent(event)
+
+    def dropEvent(self, event):
+        print event.mimeData().text()
+
+        if event.mimeData().hasUrls():
+            for url in event.mimeData().urls():
+                path = url.toLocalFile()
+
+                print _toString(path)
+                self.appendItem(path)
+            event.acceptProposedAction()
+        else:
+            super(QMainWindow,self).dropEvent(event)
+
     def on_scaleChanged(self, scale):
         print scale
         if scale < len(MainWindow.SCALE):
@@ -58,7 +83,9 @@ class MainWindow(QMainWindow):
             print 'about'
 
     def clearAll(self):
-        self.emit(QtCore.SIGNAL("when_clear()"))
+        # self.emit(QtCore.SIGNAL("when_clear()"))
+        while self.ui.tableWidget.rowCount() > 0:
+            self.ui.tableWidget.removeRow(0)
 
     def loadFromFile(self):
         fileNames = QtGui.QFileDialog.getOpenFileNames(self,
@@ -151,21 +178,6 @@ class MainWindow(QMainWindow):
         print 'onStop'
         self.showFinish()
         return True
-
-class Imaging:
-    def __init__(self):
-        pass
-
-    def resize(self, infile, scale=2):
-        print infile
-        try:
-            f, e = os.path.splitext(infile)
-            outfile = f + '_compressed' + e
-            im = Image.open(infile)
-            w, h = im.size
-            im.resize((w/scale, h/scale), Image.ANTIALIAS).save(outfile)
-        except:
-            print 'failed'
 
 if __name__ == '__main__':
     app = QtGui.QApplication( sys.argv )

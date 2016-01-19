@@ -3,24 +3,10 @@
 
 import os
 import wx
-from PIL import Image
+from imaging import Imaging
 from pyvin.core import Processor
 import pyvin.ux
 from pyvin.ux import FileDropTarget
-
-class Imaging:
-    def __init__(self):
-        pass
-
-    def resize(self, infile, scale=2):
-        f, e = os.path.splitext(infile)
-        outfile = f + '_compressed' + e
-        im = Image.open(infile)
-        w, h = im.size
-        # print w
-        # print h
-        im.resize((w/scale, h/scale), Image.ANTIALIAS).save(outfile)
-        # im.save(outfile)
 
 class MainWindow(wx.Frame):
     tsize = (20, 20)
