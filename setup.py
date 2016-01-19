@@ -2,12 +2,12 @@ from distutils.core import setup
 import py2exe
 
 wx = dict(
-    script = 'PicCompressWnd.pyw',
+    script = 'Piczip.pyw',
     icon_resources = [(1, "icon.ico")],
 )
 
 cx = dict(
-    script = 'PicCompressWnd.pyw',
+    script = 'Piczip.pyw',
     icon_resources = [(0, "icon.ico")],
 )
 

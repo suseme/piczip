@@ -161,10 +161,11 @@ class MainWindow(QMainWindow):
             item = self.ui.tableWidget.item(self.processIdx, MainWindow.COLUMN_NAME)
             name = item.text()
 
+            path = _toString(name)
             if self.scale == 0:
-                pass
+                self.img.resizeTaobao(path)
             else:
-                self.img.resize(_toString(name), self.scale)
+                self.img.resize(path, self.scale)
 
             self.setProgress(self.processIdx, 100)
             self.setDone(self.processIdx, True)

@@ -17,3 +17,14 @@ class Imaging:
             im.resize((w/scale, h/scale), Image.ANTIALIAS).save(outfile)
         except:
             print 'failed'
+            
+    def resizeTaobao(self, infile):
+        f, e = os.path.splitext(infile)
+        outfile = f + '_taobao' + e
+        im = Image.open(infile)
+        w, h = im.size
+        if w > 750:
+            scale = w * 1000 / 750
+            width = w * 1000 / scale
+            height = h * 1000 / scale
+            im.resize((width, height), Image.ANTIALIAS).save(outfile)
