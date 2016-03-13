@@ -13,7 +13,7 @@ cx = dict(
 
 py2exe_options = {
         "includes": ["sip"],
-        "dll_excludes": ["MSVCP90.dll",],
+        "dll_excludes": ["MSVCP90.dll", 'MSVCR90.dll'],
         "compressed": 1,
         "optimize": 2,
         "ascii": 0,

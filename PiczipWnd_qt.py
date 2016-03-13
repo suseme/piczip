@@ -151,6 +151,12 @@ class MainWindow(QMainWindow):
     # for callback
     def onStart(self, event):
         print 'onStart'
+
+        # clear status
+        for i in range(self.ui.tableWidget.rowCount()):
+            self.setProgress(i, 0)
+            self.setDone(i, False)
+
         self.processIdx = 0
         return True
 
