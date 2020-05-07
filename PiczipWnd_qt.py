@@ -5,8 +5,9 @@ from piczip import *
 from imaging import Imaging
 from pyvin.core import Processor
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5 import QtCore
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QMessageBox
+from PyQt5.QtGui import *
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -48,39 +49,39 @@ class MainWindow(QMainWindow):
     #     super(QMainWindow, self).dragMoveEvent(event)
 
     def dropEvent(self, event):
-        print event.mimeData().text()
+        print(event.mimeData().text())
 
         if event.mimeData().hasUrls():
             for url in event.mimeData().urls():
                 path = url.toLocalFile()
 
-                print _toString(path)
+                print(_toString(path))
                 self.appendItem(path)
             event.acceptProposedAction()
         else:
             super(QMainWindow,self).dropEvent(event)
 
     def on_scaleChanged(self, scale):
-        print scale
+        print(scale)
         if scale < len(MainWindow.SCALE):
             self.scale = MainWindow.SCALE[scale]
 
     def on_actionTriggered(self, action):
         # print action
         if action == self.ui.actionOpen:
-            print 'open'
+            print('open')
             self.loadFromFile()
         elif action == self.ui.actionClear:
-            print 'clear'
+            print('clear')
             self.clearAll()
         elif action == self.ui.actionStart:
-            print 'start'
+            print('start')
             self.startZip()
         elif action == self.ui.actionStop:
-            print 'stop'
+            print('stop')
             self.stopZip()
         elif action == self.ui.actionAbout:
-            print 'about'
+            print('about')
 
     def clearAll(self):
         # self.emit(QtCore.SIGNAL("when_clear()"))
@@ -150,7 +151,7 @@ class MainWindow(QMainWindow):
 
     # for callback
     def onStart(self, event):
-        print 'onStart'
+        print('onStart')
 
         # clear status
         for i in range(self.ui.tableWidget.rowCount()):
@@ -162,7 +163,7 @@ class MainWindow(QMainWindow):
 
     # for callback
     def onLoop(self, event):
-        print 'onLoop'
+        print('onLoop')
         if self.processIdx < self.ui.tableWidget.rowCount():
             item = self.ui.tableWidget.item(self.processIdx, MainWindow.COLUMN_NAME)
             name = item.text()
@@ -182,7 +183,7 @@ class MainWindow(QMainWindow):
 
     # for callback
     def onStop(self, event):
-        print 'onStop'
+        print('onStop')
         self.showFinish()
         return True
 

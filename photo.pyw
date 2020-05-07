@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # coding=utf8
 
+'''
+Using wxPython for GUI, already be dropped now.
+'''
+
 import os
 import wx
 from imaging import Imaging
